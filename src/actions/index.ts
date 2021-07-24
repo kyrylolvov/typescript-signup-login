@@ -24,10 +24,8 @@ export const handleFetchData =
   (accessToken: string, refreshToken: string) => async (dispatch: Function) => {
     authentification.interceptors.response.use((response) => {
       if (response.data.statusCode === 200) {
-        console.log("valid");
         dispatch({ type: "USER_ME", payload: response });
       } else {
-        console.log("invalid");
         axios({
           method: "post",
           url: "http://142.93.134.108:1111/refresh",
