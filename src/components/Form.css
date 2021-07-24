@@ -1,0 +1,74 @@
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  font-family: "Inter";
+}
+
+.form__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__section h1 {
+  font-size: 35px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.form__section input {
+  min-width: 380px;
+  padding: 20px 0;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  font-family: "Inter";
+  border-radius: 2px;
+  font-size: 15px;
+}
+
+.submit__btn {
+  padding: 17px 30px;
+  margin-top: 10px;
+  background: black;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-family: "Inter";
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.form__message {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.page__message {
+  color: #8d0ada;
+  text-transform: capitalize;
+}
+
+body {
+  background: rgb(236, 236, 236);
+}
+
+@media (max-width: 425px) {
+  .form__section {
+    align-items: center;
+  }
+  .form__section input,
+  button {
+    min-width: 310px;
+  }
+  .form__section h1 {
+    font-size: 28px;
+  }
+  .form__message {
+    font-size: 11px;
+  }
+}
