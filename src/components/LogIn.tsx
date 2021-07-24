@@ -1,20 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { handleSignUp } from "../actions";
+import { Link, Redirect } from "react-router-dom";
+import { handleLogIn } from "../actions";
 import "./Form.css";
 
 interface componentProps {
-  handleSignUp: Function;
+  handleLogIn: Function;
   message: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 interface componentState {
-  SignUpInfo: { message: string };
+  LogInInfo: { message: string; accessToken: string; refreshToken: string };
   message: string;
 }
 
-class SignUp extends React.Component<componentProps> {
+class LogIn extends React.Component<componentProps> {
   state = {
     email: "",
     password: "",
@@ -28,14 +30,20 @@ class SignUp extends React.Component<componentProps> {
 
   handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    this.props.handleSignUp(this.state.email, this.state.password);
+    this.props.handleLogIn(this.state.email, this.state.password);
   };
 
   render() {
+    if (this.props.message === "You have logged in successfuly") {
+      localStorage.setItem("accessToken", this.props.accessToken);
+      localStorage.setItem("refreshToken", this.props.refreshToken);
+      return <Redirect to="/me" />;
+    }
+
     return (
       <div className="form__wrapper">
         <form className="form__section">
-          <h1>Create an account 👋</h1>
+          <h1>Log in to your account ✌</h1>
           <input
             type="email"
             name="email"
@@ -49,11 +57,11 @@ class SignUp extends React.Component<componentProps> {
             placeholder="Password"
           />
           <button onClick={this.handleSubmit} className="submit__btn">
-            Sign Up
+            Log In
           </button>
           <p className="form__message">
             {this.props.message}
-            <Link to="/login">, proceed to login page</Link>
+            <Link to="/signup">, proceed to sign up page</Link>
           </p>
         </form>
       </div>
@@ -62,7 +70,11 @@ class SignUp extends React.Component<componentProps> {
 }
 
 const mapStateToProps = (state: componentState) => {
-  return { message: state.SignUpInfo.message };
+  return {
+    message: state.LogInInfo.message,
+    accessToken: state.LogInInfo.accessToken,
+    refreshToken: state.LogInInfo.refreshToken,
+  };
 };
 
-export default connect(mapStateToProps, { handleSignUp })(SignUp);
+export default connect(mapStateToProps, { handleLogIn })(LogIn);

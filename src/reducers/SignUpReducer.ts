@@ -1,11 +1,11 @@
-interface actionType {
+interface signUpType {
   type: string;
-  payload: { message: String };
+  payload: { message: string };
 }
 
 export default (
   state = { message: "Enter your credentials to sign up" },
-  action: actionType
+  action: signUpType
 ) => {
   switch (action.type) {
     case "USER_SIGNUP":
