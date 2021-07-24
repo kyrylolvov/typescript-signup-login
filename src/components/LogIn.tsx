@@ -69,7 +69,6 @@ class LogIn extends React.Component<componentProps> {
 }
 
 const mapStateToProps = (state: componentState) => {
-  console.log(state.LogInInfo);
   return {
     message: state.LogInInfo.message,
     accessToken: state.LogInInfo.accessToken,

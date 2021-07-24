@@ -21,7 +21,6 @@ export default (
           message: "Password is wrong",
         };
       } else {
-        console.log(action.payload);
         return {
           ...state,
           message: "You have logged in successfuly",
