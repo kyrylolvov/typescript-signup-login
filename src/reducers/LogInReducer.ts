@@ -2,8 +2,8 @@ interface logInType {
   type: string;
   payload: {
     message: string;
-    status: string;
     body: {
+      status: string;
       access_token: string;
       refresh_token: string;
     };
@@ -16,11 +16,12 @@ export default (
 ) => {
   switch (action.type) {
     case "USER_LOGIN":
-      if (action.payload.status === "error") {
+      if (action.payload.body.status === "error") {
         return {
           message: "Password is wrong",
         };
       } else {
+        console.log(action.payload);
         return {
           ...state,
           message: "You have logged in successfuly",
