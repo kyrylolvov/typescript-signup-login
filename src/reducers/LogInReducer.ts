@@ -10,7 +10,7 @@ interface logInType {
   };
 }
 
-export default (
+const LoginReducer = (
   state = { message: "Enter your credentials to log in" },
   action: logInType
 ) => {
@@ -33,3 +33,5 @@ export default (
       return state;
   }
 };
+
+export default LoginReducer;

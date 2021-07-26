@@ -10,7 +10,7 @@ interface meType {
   };
 }
 
-export default (
+const MeReducer = (
   state = { message: "Loading data, please wait...", status: null },
   action: meType
 ) => {
@@ -25,3 +25,5 @@ export default (
       return state;
   }
 };
+
+export default MeReducer;

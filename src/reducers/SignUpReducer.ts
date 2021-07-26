@@ -3,7 +3,7 @@ interface signUpType {
   payload: { message: string };
 }
 
-export default (
+const SignUpReducer = (
   state = { message: "Enter your credentials to sign up" },
   action: signUpType
 ) => {
@@ -14,3 +14,5 @@ export default (
       return state;
   }
 };
+
+export default SignUpReducer;
