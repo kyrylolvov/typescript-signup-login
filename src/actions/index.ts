@@ -1,23 +1,28 @@
 import axios from "axios";
 import authentification from "../api/authentification";
+import Main from "../api/mainApi";
+
+const mainApi = Main.getInstance();
 
 export const handleSignUp =
   (email: string, password: string) => async (dispatch: Function) => {
-    await authentification
-      .post("/sign_up", {
-        email: email,
-        password: password,
-      })
-      .then((res) => dispatch({ type: "USER_SIGNUP", payload: res.data }));
+    try {
+      const response = await mainApi.signUp({ email, password });
+      dispatch({ type: "USER_SIGNUP", payload: response });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
 export const handleLogIn =
   (email: string, password: string) => async (dispatch: Function) => {
-    await authentification
-      .post(`/login?email=${email}&password=${password}`, {
-        params: { email: email, password: password },
-      })
-      .then((res) => dispatch({ type: "USER_LOGIN", payload: res.data }));
+    try {
+      const response = await mainApi.logIn({ email, password });
+      console.log(response);
+      dispatch({ type: "USER_LOGIN", payload: response });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
 export const handleFetchData =
