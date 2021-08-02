@@ -1,12 +1,8 @@
 interface meType {
   type: string;
   payload: {
-    data: {
-      statusCode: number;
-      body: {
-        message: string;
-      };
-    };
+    message: string;
+    status: string;
   };
 }
 
@@ -18,8 +14,8 @@ const MeReducer = (
     case "USER_ME":
       return {
         ...state,
-        message: action.payload.data.body.message,
-        status: action.payload.data.statusCode,
+        message: action.payload.message,
+        status: action.payload.status,
       };
     default:
       return state;

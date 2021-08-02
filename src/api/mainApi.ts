@@ -1,8 +1,17 @@
+import axios from "axios";
 import HttpClient from "./HttpClient";
 
-export interface SignLoginRequestBody {
+interface SignLoginRequestBody {
   email: string;
   password: string;
+}
+
+interface RefreshRequestBody {
+  body: {
+    access_token: string;
+    refresh_token: string;
+  };
+  statusCode: number;
 }
 
 class Main extends HttpClient {
@@ -29,6 +38,19 @@ class Main extends HttpClient {
     }>(`/login?email=${body.email}&password=${body.password}`, {
       params: { body },
     });
+
+  public refresh = (token: string) =>
+    axios({
+      method: "post",
+      url: "http://142.93.134.108:1111/refresh",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  // this.instance.post<RefreshRequestBody>("/refresh", null, {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 }
 
 export default Main;
