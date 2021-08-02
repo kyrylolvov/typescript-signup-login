@@ -29,10 +29,8 @@ abstract class HttpClient {
     if (status !== 401) return response.data;
 
     if (status === 401 && currentRefreshToken) {
-      console.log(status);
       try {
         const refreshResponse = await main.refresh(currentRefreshToken);
-        console.log(refreshResponse);
 
         localStorage.setItem(
           "accessToken",
@@ -43,9 +41,8 @@ abstract class HttpClient {
           refreshResponse.data.body.refresh_token
         );
 
-        response.request.config.headers.Authorization = `Bearer ${refreshResponse.data.body.access_token}`;
-        console.log("s");
-        const data = await this.instance.request(response.request.config);
+        response.config.headers.Authorization = `Bearer ${refreshResponse.data.body.access_token}`;
+        const data = await this.instance.request(response.config);
         return data;
       } catch (_) {
         return Promise.reject(response);
